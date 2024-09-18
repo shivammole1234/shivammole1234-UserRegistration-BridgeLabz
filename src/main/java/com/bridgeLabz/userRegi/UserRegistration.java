@@ -40,6 +40,20 @@ public class UserRegistration {
         return matcher.matches();
     }
 
+    public boolean validate_mobile_number(String mobile_number){
+
+        String mobile_number_regex = "^\\d{2} \\d{10}$";
+        Pattern pattern =Pattern.compile(mobile_number_regex);
+
+        if(mobile_number == null)
+            return false;
+
+        Matcher matcher = pattern.matcher(mobile_number);
+        return matcher.matches();
+
+    }
+
+
 
     public static void main(String[] args) {
 
@@ -64,6 +78,18 @@ public class UserRegistration {
 
         System.out.println("is 'abc123@.com'  valid  email- "
                 +user_regi.validate_email("abc123@.com"));
+
+        System.out.println("is '91 9919819801'  valid  mobile number- "
+                +user_regi.validate_mobile_number("91 9919819801"));
+
+        System.out.println("is '91 9919819800'  valid  mobile number- "
+                +user_regi.validate_mobile_number("91 9919819800"));
+
+        System.out.println("is '919919819801'  valid  mobile number- "
+                +user_regi.validate_mobile_number("919919819801"));
+
+        System.out.println("is '91 8378923562'  valid  mobile number- "
+                +user_regi.validate_mobile_number("91 8378923562"));
 
     }
 }

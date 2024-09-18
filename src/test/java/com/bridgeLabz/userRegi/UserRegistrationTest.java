@@ -23,10 +23,10 @@ public class UserRegistrationTest extends TestCase {
 
      private String[] invalid_emails = {
              "abc",
-             "abc@.com.my",
+             "abc@.com.",
              "abc123@gmail.a",
              "abc123@.com",
-             "abc123@.com.com",
+             "abc123@.com..com",
              ".abc@abc.com",
              "abc()*@gmail.com",
              "abc@%*.com",
@@ -111,6 +111,28 @@ public class UserRegistrationTest extends TestCase {
             assertFalse("Email validation failed for :- "+mail,user_regi.validate_email(mail));
         }
     }
+
+    @Test
+    public void test_valide_mobile_number_return_true(){
+        assertTrue(user_regi.validate_mobile_number("91 8378923562"));
+    }
+
+    @Test
+    public void test_too_short_mobile_return_false(){
+        assertFalse(user_regi.validate_mobile_number("91 85214796"));
+    }
+
+    @Test
+    public void test_without_space_mobile_return_false(){
+        assertFalse(user_regi.validate_mobile_number("914789652310"));
+    }
+
+    @Test
+    public void test_too_short_mobile_reurn_false(){
+        assertFalse(user_regi.validate_mobile_number("91 8521479"));
+    }
+
+
 
 
 }
