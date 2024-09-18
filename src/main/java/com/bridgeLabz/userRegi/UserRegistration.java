@@ -54,7 +54,7 @@ public class UserRegistration {
     }
 
     public boolean validate_password(String pass){
-        String pass_regex="^(?=.*[A-Z]).{8,}$";
+        String pass_regex= "^(?=.*[A-Z])(?=.*\\d).{8,}$";
 
         Pattern pattern =Pattern.compile(pass_regex);
 
@@ -100,7 +100,9 @@ public class UserRegistration {
         System.out.println("is '91 8378923562'  valid  mobile number- "
                 +user_regi.validate_mobile_number("91 8378923562"));
 
-        // password
+
+        // use case 7 at least one number
+
         System.out.println("Is 'Password123' a valid password? "
                 + user_regi.validate_password("Password123"));
         System.out.println("Is 'password' a valid password? "
@@ -109,6 +111,10 @@ public class UserRegistration {
                 + user_regi.validate_password("Pass123"));
         System.out.println("Is 'P@ssw0rd' a valid password? "
                 + user_regi.validate_password("P@ssw0rd"));
+        System.out.println("Is 'Passw0rd' a valid password? "
+                + user_regi.validate_password("Passw0rd"));
+        System.out.println("Is 'P@ssword' a valid password? "
+                + user_regi.validate_password("P@ssword"));
 
     }
 }
