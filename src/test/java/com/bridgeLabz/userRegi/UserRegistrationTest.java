@@ -112,6 +112,8 @@ public class UserRegistrationTest extends TestCase {
         }
     }
 
+
+    //mobile number
     @Test
     public void test_valide_mobile_number_return_true(){
         assertTrue(user_regi.validate_mobile_number("91 8378923562"));
@@ -131,6 +133,17 @@ public class UserRegistrationTest extends TestCase {
     public void test_too_short_mobile_reurn_false(){
         assertFalse(user_regi.validate_mobile_number("91 8521479"));
     }
+
+    // password matching
+    @Test
+    public void test_valid_password_return_true(){
+        assertTrue(user_regi.validate_password("password"));
+    }
+
+    public void test_invalid_password_return_false(){
+        assertFalse(user_regi.validate_password("passw"));
+    }
+
 
 
 
