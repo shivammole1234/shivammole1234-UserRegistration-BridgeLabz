@@ -136,14 +136,57 @@ public class UserRegistrationTest extends TestCase {
 
     // password matching
     @Test
-    public void test_valid_password_return_true(){
+    public void test_valid_password_return_false(){
         assertTrue(user_regi.validate_password("password"));
     }
 
     public void test_invalid_password_return_false(){
         assertFalse(user_regi.validate_password("passw"));
     }
+    @Test
+    public void test_invalid_password_too_short() {
+        assertFalse(user_regi.validate_password("passw"));
+    }
 
+    @Test
+    public void test_valid_password_minimum_length() {
+        assertTrue(user_regi.validate_password("Passw0rd!"));
+    }
+
+    @Test
+    public void test_invalid_password_missing_uppercase() {
+        assertFalse(user_regi.validate_password("password1@"));
+    }
+
+    @Test
+    public void test_valid_password_with_uppercase() {
+        assertTrue(user_regi.validate_password("Password1@"));
+    }
+
+    @Test
+    public void test_invalid_password_missing_numeric() {
+        assertFalse(user_regi.validate_password("Password@"));
+    }
+
+    @Test
+    public void test_valid_password_with_numeric() {
+        assertTrue(user_regi.validate_password("Passw0rd@"));
+    }
+
+    @Test
+    public void test_invalid_password_multiple_special_characters() {
+        assertFalse(user_regi.validate_password("Passw0rd@@"));
+    }
+
+    @Test
+    public void test_invalid_password_missing_special_character() {
+        assertFalse(user_regi.validate_password("Passw0rd1"));
+    }
+
+    @Test
+    public void test_valid_password_with_one_special_character() {
+        assertTrue(user_regi.validate_password("Passw0rd@"));
+    }
 
 
 

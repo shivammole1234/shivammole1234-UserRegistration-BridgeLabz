@@ -54,14 +54,18 @@ public class UserRegistration {
     }
 
     public boolean validate_password(String pass){
-        String pass_regex="^(?=.*[A-Z]).{8,}$";
+        String pass_regex="^(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Za-z0-9]).{8,}$";
 
         Pattern pattern =Pattern.compile(pass_regex);
 
         if(pass == null)
             return false;
         Matcher matcher=pattern.matcher(pass);
-        return matcher.matches();
+
+        long soecial_char_count=pass.chars()
+                .filter(ch -> "!@#$%^&*()_+[]{}|;:,.<>?/~`".indexOf(ch) >= 0)
+                .count();
+        return matcher.matches() && soecial_char_count ==1;
     }
 
     public static void main(String[] args) {
@@ -105,10 +109,10 @@ public class UserRegistration {
                 + user_regi.validate_password("Password123"));
         System.out.println("Is 'password' a valid password? "
                 + user_regi.validate_password("password"));
-        System.out.println("Is 'Pass123' a valid password? "
-                + user_regi.validate_password("Pass123"));
-        System.out.println("Is 'P@ssw0rd' a valid password? "
-                + user_regi.validate_password("P@ssw0rd"));
+        System.out.println("Is 'Password123' a valid password? "
+                + user_regi.validate_password("Password123"));
+        System.out.println("Is 'Passw0rd#' a valid password? "
+                + user_regi.validate_password("Passw0rd#"));
 
     }
 }
