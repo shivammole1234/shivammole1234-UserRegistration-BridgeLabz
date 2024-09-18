@@ -28,15 +28,42 @@ public class UserRegistration {
         return matcher.matches();
     }
 
+    public boolean validate_email(String email){
+        String email_regex="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+
+        Pattern pattern =Pattern.compile(email_regex);
+
+        if(email == null)
+            return false;
+
+        Matcher matcher=pattern.matcher(email);
+        return matcher.matches();
+    }
+
 
     public static void main(String[] args) {
 
         UserRegistration user_regi=new UserRegistration();
-        System.out.println("is Shivam valid :- "+user_regi.validate_first_name("shiva"));
-        System.out.println("is Shivam valid :- "+user_regi.validate_first_name("Shivam"));
-        System.out.println("is Mole valid :- "+user_regi.validate_last_name("Mole"));
-        System.out.println("is mole valid :- "+user_regi.validate_last_name("mole"));
-        System.out.println("is mo valid :- "+user_regi.validate_last_name("mo"));
+        System.out.println("is Shivam valid first name :- "+user_regi.validate_first_name("shiva"));
+        System.out.println("is Shivam valid first name:- "+user_regi.validate_first_name("Shivam"));
+
+        // last name
+        System.out.println("is Mole valid last name :- "+user_regi.validate_last_name("Mole"));
+        System.out.println("is mole valid last name :- "+user_regi.validate_last_name("mole"));
+        System.out.println("is mo valid last name:- "+user_regi.validate_last_name("mo"));
+
+        // for email
+        System.out.println("is 'abc@yahoo.com'  valid  email- "
+                +user_regi.validate_email("abc@yahoo.com"));
+
+        System.out.println("is 'abc-100@yahoo.com'  valid  email- "
+                +user_regi.validate_email("abc-100@yahoo.com"));
+
+        System.out.println("is 'abc111@abc.com'  valid  email- "
+                +user_regi.validate_email("abc111@abc.com"));
+
+        System.out.println("is 'abc123@.com'  valid  email- "
+                +user_regi.validate_email("abc123@.com"));
 
     }
 }

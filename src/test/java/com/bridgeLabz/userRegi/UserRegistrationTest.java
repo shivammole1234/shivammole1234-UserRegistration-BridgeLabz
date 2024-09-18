@@ -8,6 +8,35 @@ public class UserRegistrationTest extends TestCase {
 
     UserRegistration user_regi=new UserRegistration();
 
+    /// array of valid emails
+    private String[] valid_emails = {
+            "abc@yahoo.com",
+            "abc-100@yahoo.com",
+            "abc.100@yahoo.com",
+            "abc111@abc.com",
+            "abc-100@abc.net",
+            "abc.100@abc.com.au",
+            "abc@1.com",
+            "abc@gmail.com.com",
+            "abc+100@gmail.com"
+    };
+
+     private String[] invalid_emails = {
+             "abc",
+             "abc@.com.my",
+             "abc123@gmail.a",
+             "abc123@.com",
+             "abc123@.com.com",
+             ".abc@abc.com",
+             "abc()*@gmail.com",
+             "abc@%*.com",
+             "abc..2002@gmail.com",
+             "abc.@gmail.com",
+             "abc@abc@gmail.com",
+             "abc@gmail.com.1a",
+             "abc@gmail.com.aa.au"
+    };
+
     @Test
     public void test_when_valid_fname_should_return_True(){
         boolean A_result=user_regi.validate_first_name("Shivam");
@@ -63,11 +92,25 @@ public class UserRegistrationTest extends TestCase {
 
     }
 
+    @Test
     public void test_too_Short_lname_return_false(){
         assertFalse(user_regi.validate_first_name("Xe"));
         assertFalse(user_regi.validate_first_name("Mo"));
     }
 
+    @Test
+    public void test_valid_email_return_True(){
+        for(String email :valid_emails){
+            assertTrue("Email Validation failed for :- "+email,user_regi.validate_email(email));
+        }
+    }
+
+    @Test
+    public void test_invalid_emial_return_false(){
+        for(String mail:invalid_emails){
+            assertFalse("Email validation failed for :- "+mail,user_regi.validate_email(mail));
+        }
+    }
 
 
 }
