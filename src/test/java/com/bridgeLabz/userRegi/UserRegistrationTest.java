@@ -188,7 +188,35 @@ public class UserRegistrationTest extends TestCase {
         assertTrue(user_regi.validate_password("Passw0rd@"));
     }
 
+    @Test
+    public void test_all_test_cases_in_one_method(){
 
+        // First Name Tests
+        assertTrue("Valid first name failed", user_regi.validate_first_name("Shivam"));  // Happy Case
+        assertFalse("Invalid first name passed", user_regi.validate_first_name("shivam"));  // Sad Case
+        assertFalse("Too short first name passed", user_regi.validate_first_name("Jo"));  // Sad Case
+
+        // Last Name Tests
+        assertTrue("Valid last name failed", user_regi.validate_last_name("Mole"));  // Happy Case
+        assertFalse("Invalid last name passed", user_regi.validate_last_name("mole"));  // Sad Case
+        assertFalse("Too short last name passed", user_regi.validate_last_name("Li"));  // Sad Case
+
+        // Email Tests
+        assertTrue("Valid email failed", user_regi.validate_email("abc.xyz@bl.co.in"));  // Happy Case
+        assertFalse("Invalid email passed", user_regi.validate_email("abc@.com"));  // Sad Case
+
+        // Mobile Number Tests
+        assertTrue("Valid mobile number failed", user_regi.validate_mobile_number("91 9919819801"));  // Happy Case
+        assertFalse("Invalid mobile number passed", user_regi.validate_mobile_number("919919819801"));  // Sad Case
+        assertFalse("Too short mobile number passed", user_regi.validate_mobile_number("91 99198"));  // Sad Case
+
+        // Password Tests
+        assertTrue("Valid password failed", user_regi.validate_password("Passw0rd@"));  // Happy Case
+        assertFalse("Password without special character passed", user_regi.validate_password("Passw0rd1"));  // Sad Case
+        assertFalse("Password without uppercase passed", user_regi.validate_password("password@1"));  // Sad Case
+        assertFalse("Too short password passed", user_regi.validate_password("Pass1@"));  // Sad Case
+
+    }
 
 
 }
