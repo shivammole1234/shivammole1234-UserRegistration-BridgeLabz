@@ -29,7 +29,8 @@ public class UserRegistration {
     }
 
     public boolean validate_email(String email){
-        String email_regex="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        String email_regex="^(?!\\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$\n";
+
 
         Pattern pattern =Pattern.compile(email_regex);
 

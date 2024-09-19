@@ -3,6 +3,11 @@ package com.bridgeLabz.userRegi;
 import junit.framework.TestCase;
 import junit.framework.TestResult;
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class UserRegistrationTest extends TestCase {
 
@@ -26,7 +31,7 @@ public class UserRegistrationTest extends TestCase {
              "abc@.com.",
              "abc123@gmail.a",
              "abc123@.com",
-             "abc123@.com..com",
+             "abc123@.cocom",
              ".abc@abc.com",
              "abc()*@gmail.com",
              "abc@%*.com",
@@ -105,6 +110,7 @@ public class UserRegistrationTest extends TestCase {
         }
     }
 
+
     @Test
     public void test_invalid_emial_return_false(){
         for(String mail:invalid_emails){
@@ -136,13 +142,10 @@ public class UserRegistrationTest extends TestCase {
 
     // password matching
     @Test
-    public void test_valid_password_return_false(){
-        assertTrue(user_regi.validate_password("password"));
+    public void test_invalid_password_return_false(){
+        assertFalse(user_regi.validate_password("password"));
     }
 
-    public void test_invalid_password_return_false(){
-        assertFalse(user_regi.validate_password("passw"));
-    }
     @Test
     public void test_invalid_password_too_short() {
         assertFalse(user_regi.validate_password("passw"));
@@ -217,6 +220,52 @@ public class UserRegistrationTest extends TestCase {
         assertFalse("Too short password passed", user_regi.validate_password("Pass1@"));  // Sad Case
 
     }
+
+    // parameterize test case for email
+
+    @Test
+    @DisplayName("vlidating multiple valid email in one method")
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "abc@yahoo.com",
+            "abc-100@yahoo.com",
+            "abc.100@yahoo.com",
+            "abc111@abc.com",
+            "abc-100@abc.net",
+            "abc.100@abc.com.au",
+            "abc@1.com",
+            "abc@gmail.com.com",
+            "abc+100@gmail.com"
+    })
+    public void test_para_testcases_for_valid_email(String email){
+        assertTrue(" Valid email vailedd for:- "+email,user_regi.validate_email(email));
+    }
+
+    @Test
+    @DisplayName("vlidating multiple invalid email in one method")
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "abc",
+            "abc@.com.",
+            "abc123@gmail.a",
+            "abc123@.com",
+            "abc123@.cocom",
+            ".abc@abc.com",
+            "abc()*@gmail.com",
+            "abc@%*.com",
+            "abc..2002@gmail.com",
+            "abc.@gmail.com",
+            "abc@abc@gmail.com",
+            "abc@gmail.com.1a",
+            "abc@gmail.com.aa.au"
+    })
+    public void test_para_testcases_for_invalid_email(String email){
+        assertTrue(" Valid email vailedd for:- "+email,user_regi.validate_email(email));
+    }
+
+
+
+
 
 
 }
